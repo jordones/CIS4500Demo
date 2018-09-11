@@ -66,7 +66,9 @@ public class UploadService extends IntentService {
         try {
             url = new URL("http://devnull-as-a-service.com/dev/null");
         } catch (MalformedURLException e) {
+            broadcast("Malformed URL Exception");
             e.printStackTrace();
+            return;
         }
 
         HttpURLConnection client = null;

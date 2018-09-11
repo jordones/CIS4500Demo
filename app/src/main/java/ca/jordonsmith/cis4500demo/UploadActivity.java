@@ -10,6 +10,8 @@ import android.widget.EditText;
 public class UploadActivity extends AppCompatActivity {
 
     private UploadReceiver uploadReceiver;
+
+    // Unique identifier for the broadcast sent when uploading is done
     public static final String ACTION_UPLOAD_COMPLETE = "ca.jordonsmith.cis4500demo.broadcast.UPLOAD";
 
 
@@ -20,6 +22,7 @@ public class UploadActivity extends AppCompatActivity {
 
     }
 
+    // Ran when the app comes into the foreground after being hidden
     @Override
     protected void onStart() {
         super.onStart();
@@ -29,6 +32,7 @@ public class UploadActivity extends AppCompatActivity {
         registerReceiver(uploadReceiver, intentFilter);
     }
 
+    // Ran when an app goes into the background and is hidden
     @Override
     protected void onStop() {
         super.onStop();
