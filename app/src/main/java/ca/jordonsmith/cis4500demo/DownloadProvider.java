@@ -19,6 +19,12 @@ import java.net.URLConnection;
 
 import static android.os.ParcelFileDescriptor.parseMode;
 
+/*
+ * This class uses Example code from The Busy Coder's Guide to Android
+ * by Mark L. Murphy
+ * Version 8.13
+ * Page 2550
+ * */
 public class DownloadProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI = Uri.parse("content://ca.jordonsmith.cis4500demo.files/");
@@ -67,7 +73,8 @@ public class DownloadProvider extends ContentProvider {
     @Override
     public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
 
-        System.out.println("Content Provider, servin up that uri: " + uri.toString());
+        // Included this print statement as demonstration that the Content Provider works
+        System.out.println("Content Provider, serving up content at uri: " + uri.toString());
 
         File root=getContext().getFilesDir();
         File f=new File(root, uri.getPath()).getAbsoluteFile();

@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class DownloadActivity extends AppCompatActivity {
 
@@ -46,21 +48,39 @@ public class DownloadActivity extends AppCompatActivity {
         unregisterReceiver(downloadReceiver);
     }
 
-
+    /*
+    * Ran when the download button is clicked.
+    * Starts the download service
+    * */
     public void onDownloadClicked(View view) {
 
         DownloadService.startActionDownload(this);
     }
 
+
+    /*
+    *  Ran when the user clicks on the "show downloaded content" button on screen
+    *  This method serves as a means to demonstrate that the file was read from
+    *  using the Content Provider that we've set up.
+    * */
     public void onShowClicked(View view) {
-//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DownloadProvider.CONTENT_URI + "readme.md")));md
-//        finish();
         InputStream inputStream = null;
         try {
             inputStream = getContentResolver().openInputStream(Uri.parse(DownloadProvider.CONTENT_URI + "readme.md"));
-//            Toast.makeText(this, inputStream.read(), Toast.LENGTH_SHORT).show();
-            System.out.println(inputStream.read());
 
+            StringBuffer stringBuffer = new StringBuffer();
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(inputStream)
+            );
+            String contentProviderFile = bufferedReader.readLine();
+
+            while (contentProviderFile != null) {
+                stringBuffer.append(contentProviderFile).append("\n");
+                contentProviderFile = bufferedReader.readLine();
+            }
+
+            Toast.makeText(this, "Text via content provider:\n\t" + stringBuffer.toString(), Toast.LENGTH_SHORT).show();
+            System.out.println(stringBuffer.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

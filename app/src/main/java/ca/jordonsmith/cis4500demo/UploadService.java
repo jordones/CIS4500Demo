@@ -53,8 +53,9 @@ public class UploadService extends IntentService {
     }
 
     /**
-     * Handle action Foo in the provided background thread with the provided
+     * Handle action to upload in the provided background thread with the provided
      * parameters.
+     * Networking code from post at:
      * https://www.wikihow.com/Execute-HTTP-POST-Requests-in-Android
      */
     private void handleActionUpload(String text) {
@@ -114,6 +115,9 @@ public class UploadService extends IntentService {
         }
     }
 
+    /*
+    * Broadcasts message for our Broadcast Receiver to pick up.
+    * */
     private void broadcast(String message) {
 
         Intent broadCastIntent = new Intent();
