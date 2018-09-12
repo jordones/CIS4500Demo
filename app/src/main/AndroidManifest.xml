@@ -18,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UploadActivity" />
+        <activity android:name=".UploadActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".UploadService"
@@ -27,7 +33,24 @@
         <receiver
             android:name=".UploadReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <activity android:name=".DownloadActivity" />
+
+        <service
+            android:name=".DownloadService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".DownloadReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <provider
+            android:name=".DownloadProvider"
+            android:authorities="ca.jordonsmith.cis4500demo.files"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

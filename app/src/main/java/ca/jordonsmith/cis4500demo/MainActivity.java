@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     // For when you click the download button
     public void onClickDownload(View view) {
-        // TODO: Write download side of the application
+        Intent intent = new Intent(this, DownloadActivity.class);
+        startActivity(intent);
     }
 }
